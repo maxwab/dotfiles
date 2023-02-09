@@ -1,0 +1,20 @@
+[user]
+  name = Maxime Wabartha
+  email = mwabartha@fb.com
+[alias]
+    co = checkout
+    cm = commit
+    st = status
+    br = branch
+    d = diff
+    dc = diff --cached
+    undo = reset --hard
+    hist = log --pretty=format:‘%h %ad | %s%d [%an]' --graph --date=short
+    l = log --pretty=format:“%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]” --decorate --$
+[core]
+	editor = vim
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
