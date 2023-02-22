@@ -124,3 +124,9 @@
 	"bibtex %b"
 	"pdflatex -interaction nonstopmode -output-directory %o %f"
 	"pdflatex -interaction nonstopmode -output-directory %o %f"))
+
+(add-hook 'org-mode-hook #'org-inline-pdf-mode)
+
+;; We reduce the time required to wait before the next possible keys are displayed
+(setq which-key-idle-delay 0.3)
+(setq which-key-idle-secondary-delay 0.3)
