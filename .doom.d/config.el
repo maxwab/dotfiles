@@ -21,6 +21,8 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
+;; Increase the font size from 12 (default) to 14
+(setq doom-font (font-spec :size 14))
 ;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
 ;;
@@ -102,8 +104,8 @@
 (after! org
   (require 'org-ref))
 
-(setq bibtex-completion-bibliography '("/Users/mwabartha/Documents/zotlib.bib")
-      bibtex-completion-library-path '("/Users/mwabartha/Documents/bibliography/")
+(setq bibtex-completion-bibliography "/Users/mwabartha/Documents/zotlib.bib"
+      bibtex-completion-library-path "/Users/mwabartha/Documents/bibliography/"
       bibtex-completion-notes-path "/Users/mwabartha/Documents/bibliography-notes/"
       bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
       bibtex-completion-additional-search-fields '(keywords)
@@ -116,6 +118,9 @@
       bibtex-completion-pdf-open-function
       (lambda (fpath)
         (call-process "open" nil 0 nil fpath)))
+        ;; (call-process "echo" nil 0 nil fpath)))
+
+;; (setq bibtex-completion-pdf-field '("file"))  ;; does not work
 
 ;; (setq org-latex-to-pdf-process (list "latexmk -shell-escape -bibtex -f -pdf %f"))
 
@@ -130,3 +135,7 @@
 ;; We reduce the time required to wait before the next possible keys are displayed
 (setq which-key-idle-delay 0.3)
 (setq which-key-idle-secondary-delay 0.3)
+
+;; Add mathbb as a shortcut
+(setq cdlatex-math-modify-alist '((?B "\\mathbb" nil t nil nil)))
+
