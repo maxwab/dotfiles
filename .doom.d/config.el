@@ -139,3 +139,4 @@
 ;; Add mathbb as a shortcut
 (setq cdlatex-math-modify-alist '((?B "\\mathbb" nil t nil nil)))
 
+(load! "+GTD")
