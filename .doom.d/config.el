@@ -104,21 +104,21 @@
 (after! org
   (require 'org-ref))
 
-(setq bibtex-completion-bibliography "/Users/mwabartha/Documents/zotlib.bib"
-      bibtex-completion-library-path "/Users/mwabartha/Documents/bibliography/"
-      bibtex-completion-notes-path "/Users/mwabartha/Documents/bibliography-notes/"
-      bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
-      bibtex-completion-additional-search-fields '(keywords)
-      bibtex-completion-display-formats
-      '((article       . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
-        (inbook        . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
-        (incollection  . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
-        (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
-        (t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))
-      bibtex-completion-pdf-open-function
-      (lambda (fpath)
-        (call-process "open" nil 0 nil fpath)))
-        ;; (call-process "echo" nil 0 nil fpath)))
+;; (setq bibtex-completion-bibliography "/Users/mwabartha/Documents/zotlib.bib"
+;;       bibtex-completion-library-path "/Users/mwabartha/Documents/bibliography/"
+;;       bibtex-completion-notes-path "/Users/mwabartha/Documents/bibliography-notes/"
+;;       bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
+;;       bibtex-completion-additional-search-fields '(keywords)
+;;       bibtex-completion-display-formats
+;;       '((article       . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
+;;         (inbook        . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
+;;         (incollection  . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+;;         (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+;;         (t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))
+;;       bibtex-completion-pdf-open-function
+;;       (lambda (fpath)
+;;         (call-process "open" nil 0 nil fpath)))
+;;         ;; (call-process "echo" nil 0 nil fpath)))
 
 ;; (setq bibtex-completion-pdf-field '("file"))  ;; does not work
 
@@ -140,3 +140,6 @@
 (setq cdlatex-math-modify-alist '((?B "\\mathbb" nil t nil nil)))
 
 (load! "+GTD")
+
+;; Setup org-reveal
+;; (setq org-reveal-root "file:///Users/maxwab/lib/reveal.js")
