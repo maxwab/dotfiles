@@ -51,3 +51,4 @@
 
 (package! org-ref)
 (package! org-inline-pdf)
+;; (package! helm-bibtex)

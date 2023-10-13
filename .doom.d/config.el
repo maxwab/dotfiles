@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Maxime Wabartha"
-      user-mail-address "mwabartha@meta.com")
+      user-mail-address "maximewabartha@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -76,12 +76,10 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+;;
 
 ;; Configuring org-ref
 (use-package! org-ref
-
-  ;; this bit is highly recommended: make sure Org-ref is loaded after Org
-  :after org
 
   ;; Put any Org-ref commands here that you would like to be auto loaded:
   ;; you'll be able to call these commands before the package is actually loaded.
@@ -90,23 +88,49 @@
    org-ref-bibtex-hydra/body)
 
   ;; if you don't need any autoloaded commands, you'll need the following
-  ;; :defer t
+  :defer t
 
   ;; This initialization bit puts the `orhc-bibtex-cache-file` into `~/.doom/.local/cache/orhc-bibtex-cache
   ;; Not strictly required, but Org-ref will pollute your home directory otherwise, creating the cache file in ~/.orhc-bibtex-cache
   :init
+  (after! org (require 'org-ref))
   (let ((cache-dir (concat doom-cache-dir "org-ref")))
     (unless (file-exists-p cache-dir)
       (make-directory cache-dir t))
-    (setq orhc-bibtex-cache-file (concat cache-dir "/orhc-bibtex-cache"))))
+    (setq orhc-bibtex-cache-file (concat cache-dir "/orhc-bibtex-cache")))
+
+  :config
+  (setq this-is-a-dummy-variable "hello")
+  (setq bibtex-completion-bibliography "/Users/maxwab/phd/biblio.bib")
+  (setq bibtex-completion-library-path "/Users/maxwab/Library/Mobile Documents/com~apple~CloudDocs/bibliography"
+    bibtex-completion-notes-path "/Users/maxwab/phd/paper_notes"
+    bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
+    bibtex-completion-additional-search-fields '(keywords)
+    bibtex-completion-display-formats
+    '((article       . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${journal:40}")
+      (inbook        . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} Chapter ${chapter:32}")
+      (incollection  . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+      (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*} ${booktitle:40}")
+      (t             . "${=has-pdf=:1}${=has-note=:1} ${year:4} ${author:36} ${title:*}"))
+    bibtex-completion-pdf-open-function
+    (lambda (fpath)
+      (call-process "open" nil 0 nil fpath)))
+      ;; (call-process "echo" nil 0 nil fpath)))
+  )
 
 ;; Load org-ref just after org
-(after! org
-  (require 'org-ref))
+;; (after! org
+;;   (require 'org-ref))
 
-;; (setq bibtex-completion-bibliography "/Users/mwabartha/Documents/zotlib.bib"
-;;       bibtex-completion-library-path "/Users/mwabartha/Documents/bibliography/"
-;;       bibtex-completion-notes-path "/Users/mwabartha/Documents/bibliography-notes/"
+;; Enable citation keystroke in org mode
+(map! :after org
+      :map org-mode-map
+      :prefix "C-c"
+      "[" #'org-ref-insert-link)
+
+;; (setq bibtex-completion-bibliography "/Users/maxwab/phd/biblio.bib"
+;;       bibtex-completion-library-path "/Users/maxwab/Library/Mobile Documents/com~apple~CloudDocs/bibliography"
+;;       bibtex-completion-notes-path "/Users/maxwab/phd/paper_notes"
 ;;       bibtex-completion-notes-template-multiple-files "* ${author-or-editor}, ${title}, ${journal}, (${year}) :${=type=}: \n\nSee [[cite:&${=key=}]]\n"
 ;;       bibtex-completion-additional-search-fields '(keywords)
 ;;       bibtex-completion-display-formats
@@ -118,7 +142,7 @@
 ;;       bibtex-completion-pdf-open-function
 ;;       (lambda (fpath)
 ;;         (call-process "open" nil 0 nil fpath)))
-;;         ;; (call-process "echo" nil 0 nil fpath)))
+;;      r  ;; (call-process "echo" nil 0 nil fpath)))
 
 ;; (setq bibtex-completion-pdf-field '("file"))  ;; does not work
 
@@ -126,9 +150,9 @@
 
 (setq org-latex-pdf-process
       '("pdflatex -interaction nonstopmode -output-directory %o %f"
-	"bibtex %b"
-	"pdflatex -interaction nonstopmode -output-directory %o %f"
-	"pdflatex -interaction nonstopmode -output-directory %o %f"))
+        "bibtex %b"
+        "pdflatex -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -interaction nonstopmode -output-directory %o %f"))
 
 (add-hook 'org-mode-hook #'org-inline-pdf-mode)
 
@@ -143,3 +167,8 @@
 
 ;; Setup org-reveal
 ;; (setq org-reveal-root "file:///Users/maxwab/lib/reveal.js")
+;;
+
+(use-package! magit
+    :config
+    (setq my-very-dumb-variable "125"))

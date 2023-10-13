@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PROJECTFOLDER="/Users/maxwab/dev/"
+for PROJECT in "$@"; do
+  if [ -d "$PROJECTFOLDER/$PROJECT" ]; then
+    rsync -avz --files-from=<(git -C ${PROJECTFOLDER}${PROJECT} ls-files) \
+      ${PROJECTFOLDER}${PROJECT} mila:~/dev/${PROJECT}
+  else
+    echo "Folder ${PROJECT} does not exist!"
+  fi
+done
